@@ -11,7 +11,8 @@ def get_weather(city, country, api="openweather"):
         params = {
             "q": f"{city},{country}",
             "appid": OPENWEATHER_API_KEY,
-            "units": "metric"
+            "units": "metric",
+            "lang": "ua"
         }
         response = requests.get(OPENWEATHER_URL, params=params)
         data = response.json()
@@ -19,7 +20,8 @@ def get_weather(city, country, api="openweather"):
     elif api == "weatherapi":
         params = {
             "key": WEATHERAPI_KEY,
-            "q": f"{city},{country}"
+            "q": f"{city},{country}",
+            "lang": "ua"
         }
         response = requests.get(WEATHERAPI_URL, params=params)
         data = response.json()
