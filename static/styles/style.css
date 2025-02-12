@@ -76,7 +76,8 @@ font-size: 24px;
     .email,.facebook,.phone{
       display: flex;
       flex-direction: row;
-      gap:20px
+      gap:20px;
+      align-items: center;
     }
     .elem{
       display: flex;
@@ -282,3 +283,6 @@ font-size: 17px;
 font-weight: bold;
 color: white;
 }
+
+/* adaptive */
+
