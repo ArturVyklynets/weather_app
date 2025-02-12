@@ -72,5 +72,9 @@ def weather_all():
     print(f"Отримано {len(weather_data)} міст з погодою.")
     return jsonify(weather_data)
 
+@app.before_request
+def log_request():
+    print(f"Отримано {request.method} запит на {request.path} від {request.remote_addr}")
+
 if __name__ == "__main__":
     app.run(debug=True)

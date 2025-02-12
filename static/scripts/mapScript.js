@@ -12,7 +12,7 @@ var customIcon = L.icon({
 
 fetch("/weather_all")
     .then(response => response.json())
-    .then(data => {  
+    .then(data => {
         data.forEach(city => {
             var marker = L.marker([city.lat, city.lon], { icon: customIcon }).addTo(map);
             marker.bindPopup(
