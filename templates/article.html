@@ -1,73 +1,76 @@
 <article>
-<div class="weather-container">
-        <div class="date-info">
-            <h2>Вівторок</h2>
-            <h1>10.05</h1>
-            <p>Схід <span>07:16</span></p>
-            <p>Захід <span>17:03</span></p>
-        </div>
-
-        <div class="weather-table">
-            <div class="labels">
-                <p>Температура</p>
-                <p>Тиск</p>
-                <p>Вологість</p>
-                <p>Вітер</p>
-                <p>Ймовірність опадів</p>
-            </div>
-
-            <div class="time-period">
-                <h3>НІЧ</h3>
-                <img src="moon.png" alt="Ніч ">
-                <p>00:00 03:00</p>
-                <div class="weather-values">
-                  <p>16°C 14°C</p>
-                  <p>743 743</p>
-                  <p>73% 73%</p>
-                  <p>7.3 7.3 </p>
-                  <p>10% 10%</p>
-              </div>
-            </div>
-
-            <div class="time-period">
-                <h3>РАНОК</h3>
-                <img src="cloud.png" alt="Ранок">
-                <p>06:00 09:00</p>
-                <div class="weather-values">
-                  <p>16°C 14°C</p>
-                  <p>743 743</p>
-                  <p>73% 73%</p>
-                  <p>7.3 7.3</p>
-                  <p>10% 10%</p>
-              </div>
-            </div>
-
-            <div class="time-period">
-                <h3>ДЕНЬ</h3>
-                <img src="sun.png" alt="День">
-                <p>12:00 15:00</p>
-                <div class="weather-values">
-
-                  <p>16°C 14°C</p>
-                  <p>743 743</p>
-                  <p>73% 73%</p>
-                  <p>7.3 7.3</p>
-                  <p>10% 10%</p>
-              </div>
-            </div>
-
-            <div class="time-period">
-                <h3>ВЕЧІР</h3>
-                <img src="sun-cloud.png" alt="Вечір">
-                <p>18:00 21:00</p>
-                <div class="weather-values">
-                  <p>16°C 14°C</p>
-                  <p>743 743</p>
-                  <p>73% 73%</p>
-                  <p>7.3 7.3</p>
-                  <p>10% 10%</p>
-              </div>
-            </div>
+  <div class="weather-container">
+    <div class="date-info">
+        <h2>Вівторок</h2>
+        <h1>10.05</h1>
+        <div class="sun-info">
+            <p><span class="label">Схід</span> <span class="time">07:16</span></p>
+            <p><span class="label">Захід</span> <span class="time">17:03</span></p>
         </div>
     </div>
-</article>
+    
+  
+          <div class="weather-table">
+              <div class="labels">
+                  <p>Температура</p>
+                  <p>Тиск</p>
+                  <p>Вологість</p>
+                  <p>Вітер</p>
+                  <p>Ймовірність опадів</p>
+              </div>
+  
+              <div class="time-period">
+                  <h3>НІЧ</h3>
+                  <img src="{{ url_for('static', filename='images/night.png') }}" alt="Ніч ">
+                  <p>00:00 03:00</p>
+                  <div class="weather-values">
+                    <p>16°C 14°C</p>
+                    <p>743 743</p>
+                    <p>73% 73%</p>
+                    <p>7.3 7.3 </p>
+                    <p>10% 10%</p>
+                </div>
+              </div>
+  
+              <div class="time-period">
+                  <h3>РАНОК</h3>
+                  <img src="{{ url_for('static', filename='images/morning.png') }}" alt="Ранок">
+                  <p>06:00 09:00</p>
+                  <div class="weather-values">
+                    <p>16°C 14°C</p>
+                    <p>743 743</p>
+                    <p>73% 73%</p>
+                    <p>7.3 7.3</p>
+                    <p>10% 10%</p>
+                </div>
+              </div>
+  
+              <div class="time-period">
+                  <h3>ДЕНЬ</h3>
+                  <img src="{{ url_for('static', filename='images/day.png') }}" alt="День">
+                  <p>12:00 15:00</p>
+                  <div class="weather-values">
+  
+                    <p>16°C 14°C</p>
+                    <p>743 743</p>
+                    <p>73% 73%</p>
+                    <p>7.3 7.3</p>
+                    <p>10% 10%</p>
+                </div>
+              </div>
+  
+              <div class="time-period">
+                  <h3>ВЕЧІР</h3>
+                  <img src="{{ url_for('static', filename='images/evening.png') }}" alt="Вечір">
+                  <p>18:00 21:00</p>
+                  <div class="weather-values">
+                    <p>16°C 14°C</p>
+                    <p>743 743</p>
+                    <p>73% 73%</p>
+                    <p>7.3 7.3</p>
+                    <p>10% 10%</p>
+                </div>
+              </div>
+          </div>
+      </div>
+  </article>

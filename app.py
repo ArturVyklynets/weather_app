@@ -5,7 +5,7 @@ app = Flask(__name__)
 
 @app.route("/")
 def index():
-    return render_template("index.html")
+    return render_template("weather.html")
 
 # api testing, currently simply outputs json data
 # /weather?city=kyiv&country=ukraine?api=weatherapi

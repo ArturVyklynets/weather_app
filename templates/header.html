@@ -1,10 +1,10 @@
 <header>
-        <a href="#" class="logo"><h2>LOGO</h2></a>
-       <form method="GET">
-        <input type="text" class="search" placeholder="Пошук..." >
-        <button type="submit" class="but-search">
-            <img  src="../static/images/Button.png"  width="40px" height="35px">
-        </button>
-        </form>
-    </div>
+  <a href="index.html" class="logo"><h2>LOGO</h2></a>
+ <form method="GET">
+  <input type="text" class="search" placeholder="Пошук..." >
+  <button type="submit" class="but-search">
+      <img  src="{{ url_for('static', filename='images/Button.png') }}">
+  </button>
+  </form>
+</div>
 </header>
