@@ -84,6 +84,10 @@ font-size: 24px;
       flex-direction: row;
       gap: 50px   ;
     }
+    .elem a{
+      text-decoration: none;
+      color: black;
+    }
     .facebook p {
       white-space: nowrap; 
       flex-grow: 1; 
