@@ -22,7 +22,7 @@
   
   <div class="weather-scroll">
     {% for day in weather.forecast %}
-        <div class="frame">
+        <div class="frame weather-card">
             <p>{{ day.date }}</p> 
             <p>{{ day.time }}</p>
             <img src="{{ url_for('static', filename='images/' + day.icon) }}">
@@ -41,9 +41,23 @@
     
 </div>
 
-    {% include 'article.html' %}
+<div id="weather-article" style="display: none;">
+  {% include 'article.html' %}
+</div>
   </main>
   {% include 'footer.html' %}
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        let cards = document.querySelectorAll(".weather-card");
+        let article = document.getElementById("weather-article");
+  
+        cards.forEach(card => {
+            card.addEventListener("click", function () {
+                article.style.display = "block";
+            });
+        });
+    });
+  </script>
 </body>
 
 </html>
