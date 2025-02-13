@@ -316,7 +316,6 @@ main {
 
 /* adaptive */
 
-<<<<<<< HEAD
 @media (min-width: 320px) and (max-width: 720px) {
   /* index page */
   .logo{
@@ -353,5 +352,3 @@ main {
     width: 100px;
   }
 }
-=======
->>>>>>> 7de7610ca24d4f7167c496e2d8d667aac7a4ba36
