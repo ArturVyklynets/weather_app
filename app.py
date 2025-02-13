@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, jsonify, redirect, url_for
-from weather_api import get_weather  
+from weather_api import get_weather, WeatherTime
 from capitals import load_capitals
 from concurrent.futures import ThreadPoolExecutor
 
@@ -15,15 +15,17 @@ def index():
 
 # api testing, currently simply outputs json data
 # /weather?city=kyiv&country=ukraine?api=weatherapi
-# /weather?city=ivano-frankivsk&country=ukraine
+# /weather?city=ivano-frankivsk&country=ukraine&time=forecast
 @app.route("/weather", methods=["GET"])
 def weather():
     city = request.args.get("city")
     country = request.args.get("country")
     api = request.args.get("api")
     api = api.lower() if api else "openweather"
+    time = request.args.get("time")
+    time = WeatherTime.CURRENT if not time else WeatherTime(time)
     
-    weather_data = get_weather(city, country, api)
+    weather_data = get_weather(city, country, api, time)
     
     forecast_data = [
         {"date": "Понеділок", "time": "10:05", "icon": "sunny.png", "temp_min": 16, "temp_max": 26, "sunrise": "07:16", "sunset": "17:03", "pressure": "743", "humidity": "73%", "wind": "7.3", "precipitation": "10%"},
@@ -36,11 +38,26 @@ def weather():
     ]
     
     weather_info = {
-        "city": weather_data["name"],
-        "country": weather_data["sys"]["country"],
-        "region": "Львівська область",
+        "region": "",
         "forecast": forecast_data 
     }
+    if api == "openweather":
+        if time == WeatherTime.CURRENT:
+            weather_info.update({
+                "city": weather_data["name"],
+                "country": weather_data["sys"]["country"],
+            })
+        elif time == WeatherTime.FORECAST:
+            weather_info.update({
+                "city": weather_data["city"]["name"],
+                "country": weather_data["city"]["country"],
+            })
+    elif api == "weatherapi":
+        weather_info.update({
+            "city": weather_data["location"]["name"],
+            "country": weather_data["location"]["country"],
+            "region": weather_data["location"]["region"]
+        })
 
     return render_template("weather.html", weather=weather_info)
 
