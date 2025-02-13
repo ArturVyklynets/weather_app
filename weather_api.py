@@ -237,7 +237,7 @@ def get_weather(city, country, api="openweather", time=WeatherTime.CURRENT):
             "q": f"{city},{country}",
             "appid": OPENWEATHER_API_KEY,
             "units": "metric",
-            "lang": "ua"
+            "lang": "uk"
         }
         if time == WeatherTime.CURRENT:
             response = requests.get(OPENWEATHER_URL, params=params)
@@ -251,7 +251,7 @@ def get_weather(city, country, api="openweather", time=WeatherTime.CURRENT):
         params = {
             "key": WEATHERAPI_KEY,
             "q": f"{city},{country}",
-            "lang": "ua"
+            "lang": "uk"
         }
         if time == WeatherTime.CURRENT:
             response = requests.get(WEATHERAPI_URL, params=params)
