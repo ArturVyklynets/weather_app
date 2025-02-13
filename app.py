@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, jsonify, redirect, url_for
-from weather_api import get_weather, WeatherTime
+from weather_api import get_weather, WeatherTime, normalize_openweathermap, normalize_weatherapi
 from capitals import load_capitals
 from concurrent.futures import ThreadPoolExecutor
 
@@ -42,22 +42,13 @@ def weather():
         "forecast": forecast_data 
     }
     if api == "openweather":
-        if time == WeatherTime.CURRENT:
-            weather_info.update({
-                "city": weather_data["name"],
-                "country": weather_data["sys"]["country"],
-            })
-        elif time == WeatherTime.FORECAST:
-            weather_info.update({
-                "city": weather_data["city"]["name"],
-                "country": weather_data["city"]["country"],
-            })
+        weather_data = normalize_openweathermap(weather_data, time)    
     elif api == "weatherapi":
-        weather_info.update({
-            "city": weather_data["location"]["name"],
-            "country": weather_data["location"]["country"],
-            "region": weather_data["location"]["region"]
-        })
+        weather_data = normalize_weatherapi(weather_data, time)
+    weather_info.update({
+        "city": weather_data["city"],
+        "country": weather_data["country"],
+    })
 
     return render_template("weather.html", weather=weather_info)
 
