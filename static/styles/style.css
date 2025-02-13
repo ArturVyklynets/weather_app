@@ -288,5 +288,42 @@ font-weight: bold;
 color: white;
 }
 
-/* adaptive */
+/* adaptive styles */
 
+@media (min-width: 320px) and (max-width: 720px) {
+  /* index page */
+  .logo{
+    width: 114px;
+    height: 46px;
+  }
+
+  .search{
+    width: 200px;
+    height: 35px;
+    font-size: 15px;
+  }
+
+  #map{
+    height: 500px;
+  }
+  footer a .logo{
+    display: none;
+  }
+  .elem{
+    font-size: 10px;
+    gap: 0px;
+  }
+  .email, .facebook, .phone{
+    gap: 5px;
+  }
+
+  /* weather page */
+  .city-name p{
+    font-size: 25px;
+  }
+
+  .frame{
+    width: 100px;
+    
+  }
+}
