@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify, redirect, url_for
 from weather_api import get_weather  
 from capitals import load_capitals
 from concurrent.futures import ThreadPoolExecutor
@@ -72,6 +72,10 @@ def weather_all():
 
     print(f"Отримано {len(weather_data)} міст з погодою.")
     return jsonify(weather_data)
+
+@app.errorhandler(500)
+def internal_server_error(error):
+    return redirect(url_for('index'))
 
 if __name__ == "__main__":
     app.run(debug=True)
