@@ -1,5 +1,7 @@
 <header>
-  <a href="{{ url_for('index') }}" class="logo"><h2>LOGO</h2></a>
+  <a href="{{ url_for('index') }}">
+    <img src="{{ url_for('static', filename='images/logo.png') }}" class="logo">
+  </a>
   <form method="GET" action="/weather">
   <input type="text" class="search" name="city" placeholder="Пошук..." required>
   <button type="submit" class="but-search">

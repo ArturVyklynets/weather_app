@@ -1,16 +1,21 @@
 <footer>
-  <a href="{{ url_for('index') }}" class="logo"><h2>LOGO</h2></a>
+  <a href="{{ url_for('index') }}">
+    <img src="{{ url_for('static', filename='images/logo.png') }}" class="logo">
+  </a>
          <div class="elem">
           <div class="email">
-          <img src="{{ url_for('static', filename='images/Message.png') }}">
+            <a href="mailto:weatherproject@gmail.com">
+          <img src="{{ url_for('static', filename='images/Message.png') }}"></a>
           <p>weatherproject@gmail.com</p>
           </div>
           <div class="facebook">
-              <img src="{{ url_for('static', filename='images/facebook.png') }}">
+            <a href="https://www.facebook.com/sinoptik.ua" target="_blank">
+              <img src="{{ url_for('static', filename='images/facebook.png') }}"></a>
               <p>Weather Project</p>
           </div>
               <div class="phone">
-                  <img src="{{ url_for('static', filename='images/phone.png') }}">
+                <a href="tel:380962553664">
+                  <img src="{{ url_for('static', filename='images/phone.png') }}"></a>
                   <p>+380962553664</p>
               </div>
 </div>
