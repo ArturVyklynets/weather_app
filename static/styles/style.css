@@ -159,7 +159,8 @@ main {
   flex-direction: row;
 
   max-height: 500px;
-  overflow-y: auto;
+  overflow-y: hidden;
+  overflow-x: auto;
   padding-right: 10px;
   gap: 30px;
 }

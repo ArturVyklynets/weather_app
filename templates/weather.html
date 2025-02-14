@@ -16,15 +16,13 @@
     <div class="city">
       <img src="{{ url_for('static', filename='images/map.png') }}">
       <div class="city-name">
-          <p>{{ weather.city }}, {{ weather.country }}</p>
+          <p >{{ weather.city }}, {{ weather.country }}</p>
           {% if weather.region %}
             <p>{{ weather.region }}</p>
           {% endif %}
       </div>
     </div>
      <div id="weather-scroll" class="weather-scroll"></div>
-    <div id="weather-article" style="display: none;">
-      {% include 'article.html' %}
     </div>
   </main>
 
@@ -33,8 +31,6 @@
     {{ weather.forecast | tojson | safe }}
   </script>
   <script src="{{ url_for('static', filename='scripts/main.js') }}" defer></script>
-
-  
 </body>
 
 </html>

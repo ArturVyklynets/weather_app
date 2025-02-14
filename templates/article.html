@@ -1,76 +1,37 @@
-<article>
+<article class="weather-day" data-date="{{ day.dt_txt }}">
   <div class="weather-container">
     <div class="date-info">
-        <h2>Вівторок</h2>
-        <h1>10.05</h1>
+        <h2>{{ day.weekday }}</h2>
+        <h1>{{ day.date }}</h1>
         <div class="sun-info">
-            <p><span class="label">Схід</span> <span class="time">07:16</span></p>
-            <p><span class="label">Захід</span> <span class="time">17:03</span></p>
+            <p><span class="label">Схід</span> <span class="time">{{ day.sunrise }}</span></p>
+            <p><span class="label">Захід</span> <span class="time">{{ day.sunset }}</span></p>
         </div>
+        <button class="toggle-details" data-date="{{ day.date }}">Деталі</button>
     </div>
-    
-  
-          <div class="weather-table">
-              <div class="labels">
-                  <p>Температура</p>
-                  <p>Тиск</p>
-                  <p>Вологість</p>
-                  <p>Вітер</p>
-                  <p>Ймовірність опадів</p>
-              </div>
-  
-              <div class="time-period">
-                  <h3>НІЧ</h3>
-                  <img src="{{ url_for('static', filename='images/night.png') }}" alt="Ніч ">
-                  <p>00:00 03:00</p>
-                  <div class="weather-values">
-                    <p>16°C 14°C</p>
-                    <p>743 743</p>
-                    <p>73% 73%</p>
-                    <p>7.3 7.3 </p>
-                    <p>10% 10%</p>
-                </div>
-              </div>
-  
-              <div class="time-period">
-                  <h3>РАНОК</h3>
-                  <img src="{{ url_for('static', filename='images/morning.png') }}" alt="Ранок">
-                  <p>06:00 09:00</p>
-                  <div class="weather-values">
-                    <p>16°C 14°C</p>
-                    <p>743 743</p>
-                    <p>73% 73%</p>
-                    <p>7.3 7.3</p>
-                    <p>10% 10%</p>
-                </div>
-              </div>
-  
-              <div class="time-period">
-                  <h3>ДЕНЬ</h3>
-                  <img src="{{ url_for('static', filename='images/day.png') }}" alt="День">
-                  <p>12:00 15:00</p>
-                  <div class="weather-values">
-  
-                    <p>16°C 14°C</p>
-                    <p>743 743</p>
-                    <p>73% 73%</p>
-                    <p>7.3 7.3</p>
-                    <p>10% 10%</p>
-                </div>
-              </div>
-  
-              <div class="time-period">
-                  <h3>ВЕЧІР</h3>
-                  <img src="{{ url_for('static', filename='images/evening.png') }}" alt="Вечір">
-                  <p>18:00 21:00</p>
-                  <div class="weather-values">
-                    <p>16°C 14°C</p>
-                    <p>743 743</p>
-                    <p>73% 73%</p>
-                    <p>7.3 7.3</p>
-                    <p>10% 10%</p>
-                </div>
-              </div>
-          </div>
-      </div>
-  </article>
+
+    <div class="weather-table" style="display: none;" id="details-{{ day.date }}">
+        <div class="labels">
+            <p>Температура</p>
+            <p>Тиск</p>
+            <p>Вологість</p>
+            <p>Вітер</p>
+            <p>Ймовірність опадів</p>
+        </div>
+        {% for period in day.periods %}
+        <div class="time-period">
+            <h3>{{ period.name }}</h3>
+            <img src="{{ url_for('static', filename='images/' + period.image) }}" alt="{{ period.name }}">
+            <p>{{ period.time_range }}</p>
+            <div class="weather-values">
+                <p>{{ period.temp_min }}°C {{ period.temp_max }}°C</p>
+                <p>{{ period.pressure_min }} {{ period.pressure_max }}</p>
+                <p>{{ period.humidity_min }}% {{ period.humidity_max }}%</p>
+                <p>{{ period.wind_min }} {{ period.wind_max }}</p>
+                <p>{{ period.precip_min }}% {{ period.precip_max }}%</p>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+  </div>
+</article>
