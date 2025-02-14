@@ -2,7 +2,7 @@
     <a href="{{ url_for('index') }}">
       <img src="{{ url_for('static', filename='images/logo.png') }}" class="logo">
     </a>
-    <form method="GET" action="/weather">
+    <form method="GET" action="{{ url_for('weather') }}">
     <input type="text" class="search" name="city" placeholder="Пошук..." required>
     <button type="submit" class="but-search">
         <img  src="{{ url_for('static', filename='images/Button.png') }}">

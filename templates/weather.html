@@ -1,110 +1,39 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="uk">
 
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="../static/styles/style.css">
-  <title></title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles/style.css') }}">
+  <title>Прогноз погоди</title>
 </head>
 
 <body>
   {% include 'header.html' %}
+
   <main>
     <div class="city">
       <img src="{{ url_for('static', filename='images/map.png') }}">
       <div class="city-name">
           <p>{{ weather.city }}, {{ weather.country }}</p>
-          <p>{{ weather.region }}</p>
+          {% if weather.region %}
+            <p>{{ weather.region }}</p>
+          {% endif %}
       </div>
-  </div>
-  
-  <div class="weather-scroll">
-    {% for day in weather.forecast %}
-        <div class="frame weather-card">
-            <p>{{ day.date }}</p> 
-            <p>{{ day.time }}</p>
-            <img src="{{ url_for('static', filename='images/' + day.icon) }}">
-            <div class="range">
-                <div class="range-title">
-                    <p>мін</p>
-                    <p>{{ day.temp_min }} °C</p>
-                </div>
-                <div class="range-title">
-                    <p>макс</p>
-                    <p>{{ day.temp_max }} °C</p>
-                </div>
-            </div>
-        </div>
-    {% endfor %}
-    
-</div>
-
-<div id="weather-article" style="display: none;">
-  {% include 'article.html' %}
-</div>
+    </div>
+     <div id="weather-scroll" class="weather-scroll"></div>
+    <div id="weather-article" style="display: none;">
+      {% include 'article.html' %}
+    </div>
   </main>
+
   {% include 'footer.html' %}
-  <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      let cards = document.querySelectorAll(".weather-card");
-      let article = document.getElementById("weather-article");
-      let articleContent = article.querySelector(".weather-container");
-  
-      // Передаємо динамічні дані через Jinja
-      const forecastData = JSON.parse('{{ weather.forecast | tojson | safe }}');
-  
-      cards.forEach((card, index) => {
-        card.addEventListener("click", function () {
-          // Очищаємо старі дані
-          articleContent.innerHTML = '';
-  
-          // Отримуємо дані для вибраного дня (по index)
-          let day = forecastData[index];
-  
-          // Заповнюємо article новими даними
-          articleContent.innerHTML = `
-            <div class="date-info">
-              <h2>${day.date}</h2>
-              <h1>${day.time}</h1>
-              <div class="sun-info">
-                <p><span class="label">Схід</span> <span class="time">${day.sunrise}</span></p>
-                <p><span class="label">Захід</span> <span class="time">${day.sunset}</span></p>
-              </div>
-            </div>
-            <div class="weather-table">
-              <div class="labels">
-                <p>Температура</p>
-                <p>Тиск</p>
-                <p>Вологість</p>
-                <p>Вітер</p>
-                <p>Ймовірність опадів</p>
-              </div>
-              <div class="time-period">
-                <h3>НІЧ</h3>
-                <img src="{{ url_for('static', filename='images/night.png') }}" alt="Ніч">
-                <p>00:00 03:00</p>
-                <div class="weather-values">
-                  <p>${day.temp_min}°C ${day.temp_max}°C</p>
-                  <p>${day.pressure}</p>
-                  <p>${day.humidity}</p>
-                  <p>${day.wind}</p>
-                  <p>${day.precipitation}</p>
-                </div>
-              </div>
-              <!-- Можна додавати інші періоди дня (ранок, день, вечір) тут -->
-            </div>
-          `;
-          
-          // Показуємо article
-          article.style.display = "block";
-        });
-      });
-    });
+  <script id="weather-data" type="application/json" defer>
+    {{ weather.forecast | tojson | safe }}
   </script>
-  
-  
+  <script src="{{ url_for('static', filename='scripts/main.js') }}" defer></script>
+
   
 </body>
 

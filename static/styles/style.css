@@ -161,7 +161,7 @@ main {
   max-height: 500px;
   overflow-y: auto;
   padding-right: 10px;
-  gap: 10px;
+  gap: 30px;
 }
 
 .frame {

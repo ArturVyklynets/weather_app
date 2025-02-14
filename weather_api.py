@@ -246,6 +246,7 @@ def get_weather(city, country, api="openweather", time=WeatherTime.CURRENT):
         elif time == WeatherTime.FORECAST:
             response = requests.get(OPENWEATHER_FORECAST_URL, params=params)
             data = response.json()
+            print(data)  # Перевіримо відповідь API
             return data
     elif api == "weatherapi":
         params = {

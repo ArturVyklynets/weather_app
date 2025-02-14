@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, jsonify, redirect, url_for
 from weather_api import get_weather, WeatherTime, normalize_openweathermap, normalize_weatherapi
 from capitals import load_capitals
+from country_api import get_country_from_city
 from concurrent.futures import ThreadPoolExecutor
 
 
@@ -19,38 +20,33 @@ def index():
 @app.route("/weather", methods=["GET"])
 def weather():
     city = request.args.get("city")
-    country = request.args.get("country")
-    api = request.args.get("api")
-    api = api.lower() if api else "openweather"
-    time = request.args.get("time")
-    time = WeatherTime.CURRENT if not time else WeatherTime(time)
-    
+    country = get_country_from_city(city)
+    api = request.args.get("api", "openweather").lower()
+    time = request.args.get("time", "forecast")
+
+    try:
+        time = WeatherTime(time)
+    except ValueError:
+        time = WeatherTime.CURRENT
+
     weather_data = get_weather(city, country, api, time)
-    
-    forecast_data = [
-        {"date": "Понеділок", "time": "10:05", "icon": "sunny.png", "temp_min": 16, "temp_max": 26, "sunrise": "07:16", "sunset": "17:03", "pressure": "743", "humidity": "73%", "wind": "7.3", "precipitation": "10%"},
-        {"date": "Вівторок", "time": "10:05", "icon": "sunny.png", "temp_min": 16, "temp_max": 26, "sunrise": "07:16", "sunset": "17:03", "pressure": "743", "humidity": "73%", "wind": "7.3", "precipitation": "10%"},
-        {"date": "Середа", "time": "10:05", "icon": "cloudy.png", "temp_min": 18, "temp_max": 28, "sunrise": "07:16", "sunset": "17:03", "pressure": "743", "humidity": "73%", "wind": "7.3", "precipitation": "10%"},
-        {"date": "Четвер", "time": "10:05", "icon": "rainy.png", "temp_min": 14, "temp_max": 22, "sunrise": "07:16", "sunset": "17:03", "pressure": "743", "humidity": "73%", "wind": "7.3", "precipitation": "10%"},
-        {"date": "П'ятниця", "time": "10:05", "icon": "cloudy.png", "temp_min": 18, "temp_max": 28, "sunrise": "07:16", "sunset": "17:03", "pressure": "743", "humidity": "73%", "wind": "7.3", "precipitation": "10%"},
-        {"date": "Субота", "time": "10:05", "icon": "rainy.png", "temp_min": 14, "temp_max": 22, "sunrise": "07:16", "sunset": "17:03", "pressure": "743", "humidity": "73%", "wind": "7.3", "precipitation": "10%"},
-        {"date": "Неділя", "time": "10:05", "icon": "sunny.png", "temp_min": 16, "temp_max": 26, "sunrise": "07:16", "sunset": "17:03", "pressure": "743", "humidity": "73%", "wind": "7.3", "precipitation": "10%"},
-    ]
-    
-    weather_info = {
-        "region": "",
-        "forecast": forecast_data 
-    }
+
+    if not weather_data:
+        return redirect(url_for('index'))
+
     if api == "openweather":
-        weather_data = normalize_openweathermap(weather_data, time)    
+        weather_data = normalize_openweathermap(weather_data, time)
     elif api == "weatherapi":
         weather_data = normalize_weatherapi(weather_data, time)
-    weather_info.update({
+
+    weather_info = {
         "city": weather_data["city"],
         "country": weather_data["country"],
-    })
-
+        "forecast": weather_data.get("forecast", [])
+    }
+    
     return render_template("weather.html", weather=weather_info)
+
 
 # Обробка погоди для виведення на мапу
 @app.route("/weather_all")
