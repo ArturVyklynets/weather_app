@@ -6,6 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="{{ url_for('static', filename='styles/style.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles/test.css') }}">
   <title>Прогноз погоди</title>
 </head>
 
@@ -23,7 +24,9 @@
       </div>
     </div>
      <div id="weather-scroll" class="weather-scroll"></div>
+     <div id="container" class="container"></div>
     </div>
+
   </main>
 
   {% include 'footer.html' %}

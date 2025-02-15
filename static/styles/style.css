@@ -281,7 +281,7 @@ main {
   text-align: center;
 }
 
-.weather-values p {
+.values p {
   font-size: 17px !important;
   font-weight: bold;
   padding: 4px;
