@@ -77,9 +77,15 @@ def weather_all():
     print(f"Отримано {len(weather_data)} міст з погодою.")
     return jsonify(weather_data)
 
-# @app.errorhandler(500)
-# def internal_server_error(error):
-#     return redirect(url_for('index'))
+@app.route("/error")
+def error():
+    city = request.args.get("city")
+    return render_template("error.html", city=city)
+
+@app.errorhandler(500)
+def internal_server_error(error):
+    city = request.args.get("city")
+    return redirect(url_for('error', city=city))
 
 if __name__ == "__main__":
     app.run(debug=True)

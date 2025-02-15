@@ -336,6 +336,24 @@ main {
   color: white;
 }
 
+/* error page */
+.error-message{
+  align-items: center;
+}
+
+.home-button {
+  padding: 10px 20px;
+  font-size: 18px;
+  align-self: center;
+  width: 300px;
+  color: #fff;
+  background-color: #007bff;
+  border: none;
+  border-radius: 5px;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
 /* adaptive */
 
 @media (min-width: 320px) and (max-width: 720px) {
