@@ -49,7 +49,7 @@ document.addEventListener("DOMContentLoaded", function () {
       <div class="frame weather-card" data-city="${forecastData[0].city}" data-date="${day.date}">  
           <p class="date">${formattedDate}</p>
           <p class="time">${dayOfWeek}</p>
-          <img src="${imageExists}" alt="${day.weather}">
+          <img src="${imageExists}" alt="${day.weather}" class="weather-frame-cards">
           <div class="range">
             <div class="range-title">
               <p>мін</p>
