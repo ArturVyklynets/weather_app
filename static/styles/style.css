@@ -5,7 +5,7 @@
 }
 
 #map {
-  height: 600px;
+  height: 100%;
   width: 100%;
 }
 
@@ -85,7 +85,11 @@ body {
 }
 
 main {
-  flex: 1; 
+  flex: 1;
+}
+
+.main-map {
+  padding: 18px 20px;
 }
 
 footer {

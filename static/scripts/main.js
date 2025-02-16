@@ -110,24 +110,26 @@ function findForecastByHour(data, hours) {
 }
 
 function processDayForecast(dayData) {
-  const dateObj = new Date(dayData[0].time);
+  const dateObj = new Date(dayData[0]?.time);
   const weekday = ["Неділя", "Понеділок", "Вівторок", "Середа", "Четвер", "П’ятниця", "Субота"][dateObj.getUTCDay()];
   const dateDM = `${String(dateObj.getUTCDate()).padStart(2, "0")}.${String(dateObj.getUTCMonth() + 1).padStart(2, "0")}`;
 
-  const sunriseStr = dayData[0].sunrise ? formatHHMM(dayData[0].sunrise) : "";
-  const sunsetStr = dayData[0].sunset ? formatHHMM(dayData[0].sunset) : "";
+  const sunriseStr = dayData[0]?.sunrise ? formatHHMM(dayData[0].sunrise) : "";
+  const sunsetStr = dayData[0]?.sunset ? formatHHMM(dayData[0].sunset) : "";
 
   const parts = DAY_PARTS.reduce((acc, part) => {
-    const [f1, f2] = findForecastByHour(dayData, part.hours);
+    const [f1, f2] = findForecastByHour(dayData, part.hours) || [];
+
+    if (!f1 || !f2) return acc; 
 
     const partData = [
       {
         times: [`${extractTime(f1.time)}`],
-        temperature: f1.temperature,
-        pressure: f1.pressure,
-        humidity: f1.humidity,
+        temperature: f1.temperature ?? "-",
+        pressure: f1.pressure ?? "-",
+        humidity: f1.humidity ?? "-",
         wind: f1.wind,
-        precip: convertToPercentage(f1.precipitation?.rain) + convertToPercentage(f1.precipitation?.snow)
+        precip: (convertToPercentage(f1.precipitation?.rain) + convertToPercentage(f1.precipitation?.snow))
       },
       {
         times: [`${extractTime(f2.time)}`],
@@ -135,7 +137,7 @@ function processDayForecast(dayData) {
         pressure: f2.pressure,
         humidity: f2.humidity,
         wind: f2.wind,
-        precip: convertToPercentage(f2.precipitation?.rain) + convertToPercentage(f2.precipitation?.snow)
+        precip: (convertToPercentage(f2.precipitation?.rain) + convertToPercentage(f2.precipitation?.snow))
       }
     ];
 
@@ -145,6 +147,7 @@ function processDayForecast(dayData) {
 
   return { dateDM, weekday, sunriseStr, sunsetStr, parts };
 }
+
 
 
 
