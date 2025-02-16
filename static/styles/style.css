@@ -14,7 +14,7 @@ body {
   flex-direction: column;
   background: linear-gradient(63.02deg, #A8C8ED 1.29%, #7673DC 99.57%);
   font-family: Arial, sans-serif;
-  background: linear-gradient(to bottom, #8ba7f4, #a3bef8);
+  background: linear-gradient(90deg, #8ba7f4, #a3bef8);
   color: white;
   text-align: center;
   margin: 0;
@@ -26,11 +26,10 @@ header {
   display: flex;
   background-color: rgba(255, 255, 255, 0.3);
   width: 100%;
-  height: 70px;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  padding: 0 25px;
+  padding: 5px 25px;
 }
 
 .logo {
@@ -96,9 +95,8 @@ footer {
   display: flex;
   background-color: rgba(255, 255, 255, 0.3);
   text-align: center;
-  padding: 0 25px;
+  padding: 5px 25px;
   width: 100%;
-  height: 70px;
   font-size: 16px;
   align-items: center;
   justify-content: space-between;
@@ -219,35 +217,83 @@ height: 105px;
 
 /*  */
 
+.forecast-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.2);
+  padding: 20px 0 ;
+  width: 220px;
+  height: fit-content;
+  text-align: center;
+  gap: 5px;
+}
 
+.forecast-columns {
+  display: flex;
+  width: 100%;
+  flex-direction: row; 
+  justify-content: space-between;
+}
+
+.forecast-column {
+  flex: 1; 
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.forecast-column.time {
+  font-weight: bold;
+}
+
+.forecast-icon {
+  width: 78px;
+  height: 76px;
+}
+
+.labels {
+  display: flex;
+  height: fit-content;
+  flex-direction: column; 
+  align-self: flex-end;
+  line-height: 19.5px;
+  gap: 15px;
+  padding-bottom: 20px;
+  text-align: right;
+  color: rgb(92, 92, 92);
+  font-size: 20px;
+}
+
+
+.forecast-column p:first-child {
+  margin-bottom: 15px;
+}
 
 .weather-container {
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
   align-items: center;
-  margin: auto;
   padding: 20px;
-  background: linear-gradient(63.02deg, #A8C8ED 1.29%, #7673DC 99.57%);
-  font-family: Arial, sans-serif;
-  background: linear-gradient(to bottom, #8ba7f4, #a3bef8);
-  border-bottom: none;
-}
+  max-height: 500px;
+  overflow-y: hidden;
+  overflow-x: auto;
+  padding-right: 10px;
 
-.date-info {
+}
+.day-info {
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
   margin-bottom: 70px;
 }
-
-.date-info h2,
+ .date-info h2,
 .date-info h1 {
   font-size: 30px;
   margin: 5px 0;
 }
-
 .sun-info {
   display: flex;
   flex-direction: column;
@@ -294,61 +340,20 @@ height: 105px;
 .values p {
   font-size: 17px !important;
   font-weight: bold;
-  padding: 4px;
-  word-spacing: 30px;
-}
-
-.labels {
-  text-align: right;
-  padding-right: 10px;
-  color: rgb(92, 92, 92);
-  font-size: 20px;
-  margin-top: 105px;
-
-}
-
-.labels p {
-  margin: 12px 0;
-}
-
-.time-period {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background: rgba(255, 255, 255, 0.2);
-  padding: 15px;
-  width: 220px;
-  text-align: center;
-  margin: 0 10px;
-}
-
-.time-period h3 {
-  font-size: 18px;
-  margin-bottom: 8px;
-}
-
-.time-period img {
-  width: 40px;
-  height: 40px;
-  margin-bottom: 5px;
-}
-
-.time-period p {
-  font-size: 17px;
-  margin: 3px 0;
-  word-spacing: 30px;
-}
-
-.values p {
-  font-size: 17px;
-  font-weight: bold;
   color: white;
 }
 
 /* error page */
-.error-message{
-  align-items: center;
+.error-message {
+  color: red;
+}
+.error-message-wrapper {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  flex-direction: column;
+  gap: 20px;
+  justify-content: center;
 }
 
 .home-button {

@@ -125,15 +125,15 @@ function processDayForecast(dayData) {
     const partData = [
       {
         times: [`${extractTime(f1.time)}`],
-        temperature: f1.temperature ?? "-",
-        pressure: f1.pressure ?? "-",
-        humidity: f1.humidity ?? "-",
+        temperature: Math.round(f1.temperature),
+        pressure: f1.pressure,
+        humidity: f1.humidity,
         wind: f1.wind,
         precip: (convertToPercentage(f1.precipitation?.rain) + convertToPercentage(f1.precipitation?.snow))
       },
       {
         times: [`${extractTime(f2.time)}`],
-        temperature: f2.temperature,
+        temperature: Math.round(f2.temperature),
         pressure: f2.pressure,
         humidity: f2.humidity,
         wind: f2.wind,
@@ -184,7 +184,7 @@ function renderDayForecast(dayData, containerId) {
                   <div class="forecast-columns">
                     ${day.parts[partName].map(forecast => `
                       <div class="forecast-column values">
-                        <p>${forecast.times[0]}</p>
+                        <p class="weather-time">${forecast.times[0]}</p>
                       <p>${forecast.temperature}°C</p>
                         <p>${forecast.pressure}</p>
                         <p>${forecast.humidity}</p>
@@ -203,7 +203,7 @@ function renderDayForecast(dayData, containerId) {
 }
 
 function convertToPercentage(value) {
-  return value * 100;
+  return Math.round(value * 100);
 }
 
 function extractTime(dateString) {

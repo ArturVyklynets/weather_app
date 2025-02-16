@@ -7,7 +7,11 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='styles/style.css') }}">
 </head>
 <body>
-        <h2 class="error-message">Не знайдено населеного пункту з назвою '{{ city }}'</h2>
-        <a  class="home-button" href="{{ url_for('index') }}">Повернутися на головну</a>
+  {% include 'header.html' %}
+        <div class="error-message-wrapper">
+          <h2 class="error-message">Не знайдено населеного пункту з назвою '{{ city }}'</h2>
+          <a  class="home-button" href="{{ url_for('index') }}">Повернутися на головну</a>
+        </div>
+        {% include 'footer.html' %} 
 </body>
 </html>
